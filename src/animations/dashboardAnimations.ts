@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { Slide } from "./slide";
 import { FadeIn } from "./fade";
 

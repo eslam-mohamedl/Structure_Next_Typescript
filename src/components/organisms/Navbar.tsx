@@ -3,12 +3,12 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
-import { ThemeToggle } from "../atom/ButtonTheme";
+import { ThemeToggle } from "../atoms/ButtonTheme";
 import { ListMinus, X, ChevronDown } from "lucide-react";
-import { Routes } from "@/routes/routes";
+import { Routes } from "@/utils/Data";
 import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
-import Button from "../atom/Button";
+import Button from "../atoms/Button";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -25,8 +25,7 @@ export default function Navbar() {
     const element = document.getElementById(hash);
     if (element) {
       const navbarHeight = 80;
-      const elementPosition =
-        element.getBoundingClientRect().top + window.pageYOffset;
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
       const offsetPosition = elementPosition - navbarHeight;
 
       window.scrollTo({
@@ -36,24 +35,23 @@ export default function Navbar() {
     }
   };
 
-  const handleSectionClick = (e: React.MouseEvent, path: string) => {
+ const handleSectionClick = (e: React.MouseEvent, path: string) => {
     e.preventDefault(); // Always prevent the default <a> tag click
     closeNavbar();
     setDropdownOpen(false);
-
+    
     const hash = path.split("#")[1]; // e.g., "offers"
     if (!hash) return; // Exit if there's no hash
 
     // Check if we're already on the home page
-    const isOnHomePage =
-      pathname === `/${locale}` || pathname === `/${locale}/`;
-
+    const isOnHomePage = pathname === `/${locale}` || pathname === `/${locale}/`;
+    
     if (isOnHomePage) {
       // Already on home page, just scroll smoothly
       // The 100ms timeout gives the UI time to close the navbar
       setTimeout(() => scrollToSection(hash), 100);
     } else {
-      // NOT on home page.
+      // NOT on home page. 
       // Navigate to the home page *with the hash*.
       // The useEffect below will automatically handle the scrolling.
       router.push(`/${locale}#${hash}`);
@@ -72,9 +70,9 @@ export default function Navbar() {
       }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () =>
-      window.removeEventListener("scroll", onScroll as EventListener);
+    return () => window.removeEventListener("scroll", onScroll as EventListener);
   }, []);
+
 
   // Handle hash navigation on page load
   useEffect(() => {
@@ -86,8 +84,7 @@ export default function Navbar() {
           const element = document.getElementById(elementId);
           if (element) {
             const navbarHeight = 80;
-            const elementPosition =
-              element.getBoundingClientRect().top + window.pageYOffset;
+            const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
             const offsetPosition = elementPosition - navbarHeight;
 
             window.scrollTo({
@@ -108,34 +105,18 @@ export default function Navbar() {
   }, [pathname]); // <-- *** THIS IS THE FIX ***
 
   // Separate landing page sections from routing pages
-  const landingSections = Routes.filter(
-    (item) => item.isSection || item.path === "/"
-  );
-  const routingPages = Routes.filter(
-    (item) => !item.isSection && item.path !== "/"
-  );
+  const landingSections = Routes.filter(item => item.isSection || item.path === "/");
+  const routingPages = Routes.filter(item => !item.isSection && item.path !== "/");
 
   return (
     <div
       id="navbar"
-      className={`bg-light-primary dark:bg-dark-secondary dark:border-dark-secondary fixed top-0 z-50 flex h-[80px] w-full items-center justify-between border-b border-neutral-200 px-4 transition-all duration-300 ease-in-out sm:px-10 md:px-25 ${
-        isScrolled
-          ? "bg-light-primary border-b border-sky-200"
-          : "bg-light-primary"
-      }`}
+      className={`bg-light-primary dark:bg-dark-secondary dark:border-dark-secondary fixed top-0 z-50 flex h-[80px] w-full items-center justify-between border-b border-neutral-200 px-4 transition-all duration-300 ease-in-out sm:px-10 md:px-25 ${isScrolled ? "bg-light-primary border-b border-sky-200" : "bg-light-primary"}`}
     >
       {/* Logo Section */}
       <div className="flex items-center gap-2 pr-0">
-        <Link
-          href={`/${locale}`}
-          className="flex items-center gap-x-2 text-lg font-semibold"
-        >
-          <Image
-            src="/assets/images/logo1.png"
-            alt="logo"
-            width={50}
-            height={50}
-          />
+        <Link href={`/${locale}`} className="flex items-center gap-x-2 text-lg font-semibold">
+          <Image src="/assets/images/logo1.png" alt="logo" width={50} height={50} />
         </Link>
       </div>
 
@@ -151,22 +132,12 @@ export default function Navbar() {
 
       {/* Navbar items and buttons */}
       <div
-        className={`bg-light-primary dark:bg-dark-secondary fixed top-0 right-0 h-screen w-full flex-1 border-none shadow-lg transition-all duration-300 ease-in-out md:static md:h-auto md:w-auto md:shadow-none ${
-          open ? "translate-x-0" : "translate-x-full"
-        } z-60 md:translate-x-0`}
+        className={`bg-light-primary dark:bg-dark-secondary fixed top-0 right-0 h-screen w-full flex-1 border-none shadow-lg transition-all duration-300 ease-in-out md:static md:h-auto md:w-auto md:shadow-none ${open ? "translate-x-0" : "translate-x-full"} z-60 md:translate-x-0`}
       >
         {/* Logo and close icon inside toggle menu */}
         <div className="flex w-full items-center justify-between p-4 md:hidden">
-          <Link
-            href={`/${locale}`}
-            className="flex items-center gap-x-2 text-lg font-semibold"
-          >
-            <Image
-              src="/assets/images/logo1.png"
-              alt="logo"
-              width={70}
-              height={70}
-            />
+          <Link href={`/${locale}`} className="flex items-center gap-x-2 text-lg font-semibold">
+            <Image src="/assets/images/logo1.png" alt="logo" width={70} height={70} />
           </Link>
           <div className="flex justify-end py-6 md:hidden">
             <button
@@ -186,7 +157,7 @@ export default function Navbar() {
           {/* Navbar Items */}
           <ul className="text-dark mx-auto flex flex-col items-center gap-4 text-lg font-medium md:flex-row md:gap-3 md:text-base md:font-normal dark:text-white">
             {/* Landing page section links */}
-            {landingSections.map((item) => (
+            {landingSections.map(item => (
               <li
                 key={item.id}
                 className="mb-[25px] cursor-pointer text-3xl md:text-lg lg:mb-[0px]"
@@ -199,7 +170,10 @@ export default function Navbar() {
                     {t(item.key)}
                   </a>
                 ) : (
-                  <Link href={`/${locale}${item.path}`} onClick={closeNavbar}>
+                  <Link
+                    href={`/${locale}${item.path}`}
+                    onClick={closeNavbar}
+                  >
                     {t(item.key)}
                   </Link>
                 )}
@@ -217,21 +191,15 @@ export default function Navbar() {
                   <span>{locale === "ar" ? "المزيد" : "More"}</span>
                   <ChevronDown
                     size={20}
-                    className={`transition-transform duration-200 ${
-                      dropdownOpen ? "rotate-180" : ""
-                    }`}
+                    className={`transition-transform duration-200 ${dropdownOpen ? "rotate-180" : ""}`}
                   />
                 </div>
 
                 {/* Dropdown content */}
                 {dropdownOpen && (
-                  <div
-                    className={`absolute top-full ${
-                      locale === "ar" ? "right-0" : "left-0"
-                    } z-50 mt-0 w-48 pt-2`}
-                  >
+                  <div className={`absolute top-full ${locale === "ar" ? "right-0" : "left-0"} z-50 mt-0 w-48 pt-2`}>
                     <div className="dark:bg-dark-secondary overflo-whidden rounded-lg border border-neutral-200 bg-white shadow-lg dark:border-slate-700">
-                      {routingPages.map((item) => (
+                      {routingPages.map(item => (
                         <Link
                           key={item.id}
                           href={`/${locale}${item.path}`}

@@ -1,27 +1,16 @@
-// src/hooks/useApiQuery.ts
 import { useQuery } from "@tanstack/react-query";
-import type { UseQueryOptions } from "@tanstack/react-query";
-import apiClient from "../services/ApiClient";
+import type { QueryKey } from "@tanstack/query-core";
+type QueryFn<T> = () => Promise<T>;
 
-interface UseApiQueryProps<
-  T,
-  P extends Record<string, unknown> = Record<string, never>
-> {
-  queryKey: readonly [...(string | number | P)[]]; // key متنوع
-  url: string;
-  params?: P; // Query params اختياري
-  options?: UseQueryOptions<T>; // React Query Options
-  enabled?: boolean;
-}
-
-export function useApiQuery<
-  T,
-  P extends Record<string, unknown> = Record<string, never>
->({ queryKey, url, params, options, enabled = true }: UseApiQueryProps<T, P>) {
+export function useApiQuery<T>(
+  key: QueryKey,
+  queryFn: QueryFn<T>,
+  options?: Omit<Parameters<typeof useQuery<T>>[0], "queryKey" | "queryFn">,
+) {
   return useQuery<T>({
-    queryKey,
-    queryFn: () => apiClient.get<T, P>(url, params),
-    enabled,
+    queryKey: key,
+    queryFn,
     ...options,
   });
+  
 }

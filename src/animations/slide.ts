@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 
@@ -50,8 +50,8 @@ export const Slide = (
 //  ============ مثال مع محتوى متغير ============
 
 // function TabContent({ activeTab }: { activeTab: string }) {
-// Pass activeTab as dependency so animation reruns when tab changes
-// ادى الصفحه النشطه للسلايد عشان الحركة تتنفذ تاني لما الصفحه تتغير
+ // Pass activeTab as dependency so animation reruns when tab changes
+ // ادى الصفحه النشطه للسلايد عشان الحركة تتنفذ تاني لما الصفحه تتغير
 //   const divRef = Slide("right", 0, [activeTab]);
 
 //   return (

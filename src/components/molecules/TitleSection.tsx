@@ -1,9 +1,26 @@
-import React from 'react'
+import Text from '../atoms/Text';
+import Title from '../atoms/Title';
 
-function TitleSection() {
-  return (
-    <div>TitleSection</div>
-  )
+interface TitleSectionProps {
+  title: string;
+  text: string;
+  titleVariant: 'primary' | 'secondary';
+  TextVariant: 'primary' | 'secondary';
 }
-
-export default TitleSection
+export default function TitleSection({
+  title,
+  text,
+  titleVariant = 'primary',
+  TextVariant = 'primary',
+}: TitleSectionProps) {
+  return (
+    <div>
+      <Title size="lg" variant={titleVariant}>
+        {title}
+      </Title>
+      <Text size="md" variant={TextVariant}>
+        {text}
+      </Text>
+    </div>
+  );
+}

@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { FadeIn } from "./fade";
 import { Slide } from "./slide";
 import { StaggerContainer } from "./stagger";

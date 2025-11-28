@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { ScaleIn } from "./scale";
 import { FadeIn } from "./fade";
 

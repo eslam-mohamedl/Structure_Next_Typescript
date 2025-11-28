@@ -1,7 +1,8 @@
-import React from "react";
-
-function page() {
-  return <div className="bg-bg-alt">page</div>;
+import { redirect } from "next/navigation";
+//comment
+function Page() {
+  redirect("/ar");
+  return null;
 }
 
-export default page;
+export default Page;

@@ -1,20 +1,20 @@
-"use client";
+"use client"
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 type Direction = "up" | "down" | "left" | "right" | "none";
 
+
 export const FadeIn = (
   direction: Direction = "none", // دا الافتراضي مفيش اتجاه
-  delay: number = 0 // تأخير قبل بدء الحركة بالثواني قيمته الافتراضية 0
+  delay: number = 0 // تأخير قبل بدء الحركة بالثواني قيمته الافتراضية 0 
 ) => {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (!ref.current) return; // لو الريف مش موجود مفيش داعي ننفذ الكود
 
-    let x = 0,
-      y = 0;
+    let x = 0, y = 0;
 
     if (direction === "left") x = 50;
     else if (direction === "right") x = -50;
@@ -42,7 +42,7 @@ export const FadeIn = (
   return ref;
 };
 //  استخدامه
-// مع ال hero Image مثلا
+// مع ال hero Image مثلا 
 // تاثيره بيخلي الصورة تظهر مع حركة خفيفة من اليمين
 
 // function HeroImage() {
