@@ -1,238 +1,167 @@
 "use client";
-import Image from "next/image";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
-import { ThemeToggle } from "../atoms/ButtonTheme";
 import { ListMinus, X, ChevronDown } from "lucide-react";
-import { Routes } from "@/utils/Data";
-import { useTranslations } from "next-intl";
-import { useLocale } from "next-intl";
+import { Routes } from "@/routes/routes";
 import Button from "../atoms/Button";
-
+import ButtonTheme from "@/components/atoms/ButtonTheme";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const t = useTranslations("navList");
-  const toggleNavbar = () => setOpen(!open);
-  const closeNavbar = () => setOpen(false);
-  const locale = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
 
-  const scrollToSection = (hash: string) => {
-    const element = document.getElementById(hash);
-    if (element) {
-      const navbarHeight = 80;
-      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = elementPosition - navbarHeight;
-
-      window.scrollTo({
-        top: Math.max(0, offsetPosition),
-        behavior: "smooth",
-      });
-    }
-  };
-
- const handleSectionClick = (e: React.MouseEvent, path: string) => {
-    e.preventDefault(); // Always prevent the default <a> tag click
-    closeNavbar();
+  const toggleNavbar = () => setOpen(prev => !prev);
+  const closeNavbar = () => {
+    setOpen(false);
     setDropdownOpen(false);
-    
-    const hash = path.split("#")[1]; // e.g., "offers"
-    if (!hash) return; // Exit if there's no hash
-
-    // Check if we're already on the home page
-    const isOnHomePage = pathname === `/${locale}` || pathname === `/${locale}/`;
-    
-    if (isOnHomePage) {
-      // Already on home page, just scroll smoothly
-      // The 100ms timeout gives the UI time to close the navbar
-      setTimeout(() => scrollToSection(hash), 100);
-    } else {
-      // NOT on home page. 
-      // Navigate to the home page *with the hash*.
-      // The useEffect below will automatically handle the scrolling.
-      router.push(`/${locale}#${hash}`);
-    }
   };
 
+  // Scroll effect
   useEffect(() => {
-    let ticking = false;
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          setIsScrolled(window.scrollY > 100);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll as EventListener);
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-
-  // Handle hash navigation on page load
-  useEffect(() => {
-    const handleHashNavigation = () => {
-      const hash = window.location.hash;
-      if (hash) {
-        const elementId = hash.substring(1);
-        setTimeout(() => {
-          const element = document.getElementById(elementId);
-          if (element) {
-            const navbarHeight = 80;
-            const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-            const offsetPosition = elementPosition - navbarHeight;
-
-            window.scrollTo({
-              top: Math.max(0, offsetPosition),
-              behavior: "smooth",
-            });
-          }
-        }, 100);
-      }
-    };
-
-    // Handle initial hash
-    handleHashNavigation();
-
-    // Listen for hash changes
-    window.addEventListener("hashchange", handleHashNavigation);
-    return () => window.removeEventListener("hashchange", handleHashNavigation);
-  }, [pathname]); // <-- *** THIS IS THE FIX ***
-
-  // Separate landing page sections from routing pages
-  const landingSections = Routes.filter(item => item.isSection || item.path === "/");
-  const routingPages = Routes.filter(item => !item.isSection && item.path !== "/");
+  // Separate main and secondary pages
+  const mainPageSections = Routes.filter(r => r.id <= 5);
+  const routingPages = Routes.filter(r => r.id > 5);
 
   return (
-    <div
-      id="navbar"
-      className={`bg-light-primary dark:bg-dark-secondary dark:border-dark-secondary fixed top-0 z-50 flex h-[80px] w-full items-center justify-between border-b border-neutral-200 px-4 transition-all duration-300 ease-in-out sm:px-10 md:px-25 ${isScrolled ? "bg-light-primary border-b border-sky-200" : "bg-light-primary"}`}
+    <nav
+      className={`px-md fixed top-0 z-50 h-[80px] w-full backdrop-blur-xl transition-all duration-100 ease-in-out ${
+        isScrolled
+          ? "bg-bg-alt bg-bg/30 bg-dark:bg-alt shadow-md backdrop-blur-xl"
+          : "bg-bg bg-transparent shadow-sm"
+      }`}
     >
-      {/* Logo Section */}
-      <div className="flex items-center gap-2 pr-0">
-        <Link href={`/${locale}`} className="flex items-center gap-x-2 text-lg font-semibold">
-          <Image src="/assets/images/logo1.png" alt="logo" width={50} height={50} />
+      <div className="container mx-auto flex items-center justify-between py-4 sm:px-10 md:px-0">
+        {/* Logo */}
+        <Link href="/" className="text-4xl font-bold md:text-2xl">
+          <span className="text-primary">Survey</span> <span className="text-bg">Land</span>
         </Link>
-      </div>
 
-      {/* Hamburger menu for mobile */}
-      <div className="md:hidden">
-        <button
-          onClick={toggleNavbar}
-          className="text-dark-secondary dark:text-light-secondary focus:outline"
-        >
-          <ListMinus className="bg-shadow-emerald-800" size={35} />
-        </button>
-      </div>
+        {/* Desktop Links */}
+        <ul className="text-dark dark:text-light hidden items-center gap-4 text-base font-medium md:flex">
+          {mainPageSections.map(item => (
+            <li key={item.id}>
+              <Link
+                href={item.path}
+                className="text-dark dark:text-light active:text-primary focus:text-primary relative"
+              >
+                {item.key}
+                <span></span>
+              </Link>
+            </li>
+          ))}
 
-      {/* Navbar items and buttons */}
-      <div
-        className={`bg-light-primary dark:bg-dark-secondary fixed top-0 right-0 h-screen w-full flex-1 border-none shadow-lg transition-all duration-300 ease-in-out md:static md:h-auto md:w-auto md:shadow-none ${open ? "translate-x-0" : "translate-x-full"} z-60 md:translate-x-0`}
-      >
-        {/* Logo and close icon inside toggle menu */}
-        <div className="flex w-full items-center justify-between p-4 md:hidden">
-          <Link href={`/${locale}`} className="flex items-center gap-x-2 text-lg font-semibold">
-            <Image src="/assets/images/logo1.png" alt="logo" width={70} height={70} />
+          {/* Dropdown */}
+          <li className="relative">
+            {dropdownOpen && (
+              <div className="bg-bg dark:bg-dark-secondary absolute top-full left-0 mt-2 w-48 overflow-hidden rounded-md shadow-lg">
+                {routingPages.map(item => (
+                  <Link
+                    key={item.id}
+                    href={item.path}
+                    onClick={closeNavbar}
+                    className="block px-4 py-2 text-base transition-colors active:bg-gray-200 dark:active:bg-gray-700"
+                  >
+                    {item.key}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </li>
+        </ul>
+
+        {/* Buttons */}
+        <div className="hidden items-center gap-3 md:flex">
+          <ButtonTheme />
+          <Link href="/sign-in">
+            <Button size="lg" variant="primary">
+              Login
+            </Button>
           </Link>
-          <div className="flex justify-end py-6 md:hidden">
-            <button
-              onClick={closeNavbar}
-              className="text-dark-secondary dark:text-light-secondary focus:outline"
-            >
-              <X className="bg-shadow-emerald-800" size={50} />
-            </button>
-          </div>
         </div>
 
-        {/* Divider */}
-        <div className="border-b border-neutral-300 md:hidden dark:border-b-cyan-950"></div>
+        {/* Hamburger Menu */}
+        <div className="md:hidden">
+          <button onClick={toggleNavbar} className="text-dark dark:text-light">
+            <ListMinus size={30} />
+          </button>
+        </div>
+      </div>
 
-        {/* Navbar Items and buttons */}
-        <div className="flex flex-1 flex-col items-center justify-between gap-6 p-6 md:flex-row md:p-0">
-          {/* Navbar Items */}
-          <ul className="text-dark mx-auto flex flex-col items-center gap-4 text-lg font-medium md:flex-row md:gap-3 md:text-base md:font-normal dark:text-white">
-            {/* Landing page section links */}
-            {landingSections.map(item => (
-              <li
-                key={item.id}
-                className="mb-[25px] cursor-pointer text-3xl md:text-lg lg:mb-[0px]"
+      {/* Mobile Menu */}
+      <div
+        className={`bg-bg-alt transition-translate fixed top-0 right-0 z-40 h-screen w-full duration-300 md:hidden ${
+          open ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="bg-bg flex items-center justify-between px-4 py-4">
+          <Link href="/" className="text-4xl font-bold md:text-2xl">
+            <span className="text-primary">Survey</span> <span className="text-bg">Land</span>
+          </Link>
+          <button onClick={closeNavbar} className="text-dark dark:text-light">
+            <X size={45} />
+          </button>
+        </div>
+
+        <ul className="text-dark dark:text-light mt-15 flex flex-col items-center gap-6 px-4 text-lg font-medium">
+          {mainPageSections.map(item => (
+            <li key={item.id}>
+              <Link
+                href={item.path}
+                onClick={closeNavbar}
+                className="active:text-primary focus:text-primary text-3xl md:text-2xl"
               >
-                {item.path.includes("#") ? (
-                  <a
-                    href={`/${locale}${item.path}`}
-                    onClick={(e) => handleSectionClick(e, item.path)}
-                  >
-                    {t(item.key)}
-                  </a>
-                ) : (
+                {item.key}
+              </Link>
+            </li>
+          ))}
+
+          {/* Dropdown Mobile */}
+          <li className="w-full">
+            <div
+              onClick={() => setDropdownOpen(prev => !prev)}
+              className="mb-5 flex cursor-pointer items-center justify-center rounded text-3xl transition active:bg-gray-200 md:text-2xl dark:active:bg-gray-700"
+            >
+              Pages
+              <ChevronDown
+                className={`transition-transform duration-300 ${dropdownOpen ? "rotate-180" : ""}`}
+              />
+            </div>
+            {dropdownOpen && (
+              <div className="mt-2 ml-4 flex flex-col gap-2">
+                {routingPages.map(item => (
                   <Link
-                    href={`/${locale}${item.path}`}
+                    key={item.id}
+                    href={item.path}
                     onClick={closeNavbar}
+                    className="active:text-primary focus:text-primary my-2 flex cursor-pointer items-center justify-center text-3xl md:text-2xl"
                   >
-                    {t(item.key)}
+                    {item.key}
                   </Link>
-                )}
-              </li>
-            ))}
-
-            {/* Dropdown menu for routing pages */}
-            {routingPages.length > 0 && (
-              <li
-                className="group relative mb-[25px] text-3xl md:text-lg lg:mb-[0px]"
-                onMouseEnter={() => setDropdownOpen(true)}
-                onMouseLeave={() => setDropdownOpen(false)}
-              >
-                <div className="flex cursor-pointer items-center gap-1">
-                  <span>{locale === "ar" ? "المزيد" : "More"}</span>
-                  <ChevronDown
-                    size={20}
-                    className={`transition-transform duration-200 ${dropdownOpen ? "rotate-180" : ""}`}
-                  />
-                </div>
-
-                {/* Dropdown content */}
-                {dropdownOpen && (
-                  <div className={`absolute top-full ${locale === "ar" ? "right-0" : "left-0"} z-50 mt-0 w-48 pt-2`}>
-                    <div className="dark:bg-dark-secondary overflo-whidden rounded-lg border border-neutral-200 bg-white shadow-lg dark:border-slate-700">
-                      {routingPages.map(item => (
-                        <Link
-                          key={item.id}
-                          href={`/${locale}${item.path}`}
-                          onClick={() => {
-                            setDropdownOpen(false);
-                            closeNavbar();
-                          }}
-                          className="block px-4 py-3 text-base transition-colors hover:bg-slate-100 dark:hover:bg-slate-700"
-                        >
-                          {t(item.key)}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </li>
+                ))}
+              </div>
             )}
-          </ul>
+          </li>
 
-          {/* Navbar buttons */}
-          <div className="flex flex-col items-center gap-4 md:flex-row">
-            <ThemeToggle />
-            <Link href={`/${locale}/sign-up`}>
-              <Button variant="outline2" size="md">
-                {t(`register`)}
+          <li className="mt-6 flex w-full flex-col items-center gap-4">
+            <ButtonTheme />
+            <Link href="/sign-in">
+              <Button
+                className="bg-primary rounded-md px-4 py-2 text-white transition active:opacity-90"
+                size="md"
+                variant="primary"
+              >
+                Login
               </Button>
             </Link>
-            <Link href={`/${locale}/sign-in`}>
-              <Button size="md">{t(`login`)}</Button>
-            </Link>
-          </div>
-        </div>
+            <Link href="/sign-in"></Link>
+          </li>
+        </ul>
       </div>
-    </div>
+    </nav>
   );
 }

@@ -28,7 +28,7 @@ export default function ButtonLanguages() {
   return (
     <button
       onClick={toggleLang}
-      className="bg-primary text-light-100 hover:bg-bg-alt fixed right-6 bottom-6 z-50 flex h-14 w-14 cursor-pointer items-center justify-center rounded-full text-sm font-medium shadow-md transition-all duration-200 hover:shadow-lg"
+      className="bg-primary hover:bg-bg-alt fixed right-6 bottom-6 z-50 flex h-14 w-14 cursor-pointer items-center justify-center rounded-full text-sm font-medium text-white shadow-md transition-all duration-200 hover:shadow-lg dark:bg-white"
       title={t("change_language")}
     >
       {t("lang")}

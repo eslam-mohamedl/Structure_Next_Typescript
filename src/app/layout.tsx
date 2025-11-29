@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import { Cairo } from "next/font/google";
 import "./globals.css";
-
+import ClientLoader from "@/lottie/ClientLoader";
 export const metadata: Metadata = {
-  title: "Syana Al An",
-  description: "Syana Al An for maintenance and repair services",
+  title: "New Project",
+  description: "Structure Next Typescript",
 };
 
 const cairo = Cairo({
-  subsets: ['latin'],
-})
+  subsets: ["latin"],
+});
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -18,7 +18,9 @@ export default function RootLayout({
   return (
     // add language attribute to html tag for accessibility and SEO
     <html suppressHydrationWarning className={cairo.className} lang="en">
-      <body>{children}</body>
+      <body>
+        <ClientLoader>{children}</ClientLoader>
+      </body>
     </html>
   );
 }
