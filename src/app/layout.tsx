@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cairo } from "next/font/google";
 import "./globals.css";
 import ClientLoader from "@/lottie/ClientLoader";
+import ThemeProviderClient from "@/providers/ThemeProviderClient";
 export const metadata: Metadata = {
   title: "New Project",
   description: "Structure Next Typescript",
@@ -19,7 +20,9 @@ export default function RootLayout({
     // add language attribute to html tag for accessibility and SEO
     <html suppressHydrationWarning className={cairo.className} lang="en">
       <body>
-        <ClientLoader>{children}</ClientLoader>
+        <ThemeProviderClient>
+          <ClientLoader> {children}</ClientLoader>
+        </ThemeProviderClient>
       </body>
     </html>
   );
