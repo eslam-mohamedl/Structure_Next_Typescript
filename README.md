@@ -103,7 +103,7 @@ src/
  │
  ├── lib/                     # Library utilities or external integrations
  │
- ├── locales/                 # i18n translation files (en, ar, fr, etc.)
+ ├── messages/                 # i18n translation files (en, ar, fr, etc.)
  │
  ├── modules/                 # Feature-based modules
  │   ├── auth/                # Authentication module
