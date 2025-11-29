@@ -5,7 +5,7 @@ import { useRouter, usePathname } from "next/navigation";
 export default function ButtonLanguages() {
   const router = useRouter();
   const pathname = usePathname();
-  const t = useTranslations("languages");
+  const t = useTranslations("language");
 
   const pathParts = pathname.split("/");
   const currentLocale = pathParts[1] === "ar" ? "ar" : "en";
@@ -29,7 +29,7 @@ export default function ButtonLanguages() {
     <button
       onClick={toggleLang}
       className="bg-primary hover:bg-bg-alt fixed right-6 bottom-6 z-50 flex h-14 w-14 cursor-pointer items-center justify-center rounded-full text-sm font-medium text-white shadow-md transition-all duration-200 hover:shadow-lg dark:bg-white"
-      title={t("change_language")}
+      title={t("lang")}
     >
       {t("lang")}
     </button>

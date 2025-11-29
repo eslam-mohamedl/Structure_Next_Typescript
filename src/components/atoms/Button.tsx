@@ -47,7 +47,7 @@ const Button = ({
 
   const widthClass = fullWidth ? "w-full" : "";
 
-  const classes = `${baseClasses} rounded-lg ${variants[variant]} ${sizes[size]} ${widthClass} ${className}`;
+  const classes = `${baseClasses} rounded-md ${variants[variant]} ${sizes[size]} ${widthClass} ${className}`;
 
   const content = (
     <button

@@ -1,7 +1,12 @@
 import React from "react";
+import GuestTemplate from "@/components/templates/GuestTemplate";
 
 function page() {
-  return <div className="h-[1000px]">home</div>;
+  return (
+    <GuestTemplate>
+      <div>home</div>
+    </GuestTemplate>
+  );
 }
 
 export default page;

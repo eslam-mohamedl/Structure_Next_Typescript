@@ -7,7 +7,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export default function PublicLayout({ children }: Props) {
+export default function GuestTemplate({ children }: Props) {
   return (
     <div className="mx-auto flex min-h-screen flex-col">
       <Navbar />
