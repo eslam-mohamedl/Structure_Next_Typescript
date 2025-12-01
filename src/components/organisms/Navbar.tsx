@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ListMinus, X, ChevronDown } from "lucide-react";
+import { ListMinus, X } from "lucide-react";
 import { Routes } from "@/routes/routes";
 import Button from "../atoms/Button";
 import ButtonTheme from "@/components/atoms/ButtonTheme";

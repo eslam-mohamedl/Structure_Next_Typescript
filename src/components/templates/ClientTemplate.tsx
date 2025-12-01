@@ -1,6 +1,6 @@
 "use client";
 import Sidebar from "@/components/organisms/Sidebar";
-import ButtonLanguages from "@/components/atoms/ButtonLangauges";
+import ButtonLanguages from "@/components/atoms/LocaleSwitcher";
 
 export default function ClientTemplate({ children }: { children: React.ReactNode }) {
   return (

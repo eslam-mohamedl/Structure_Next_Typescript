@@ -1,6 +1,6 @@
 "use client";
 import Footer from "@/components/organisms/Footer";
-import ButtonLanguages from "@/components/atoms/ButtonLangauges";
+import ButtonLanguages from "@/components/atoms/LocaleSwitcher";
 import Navbar from "@/components/organisms/Navbar";
 
 interface Props {

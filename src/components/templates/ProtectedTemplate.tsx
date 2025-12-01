@@ -1,5 +1,5 @@
 import Sidebar from "@/components/organisms/Sidebar";
-import ButtonLanguages from "@/components/atoms/ButtonLangauges";
+import ButtonLanguages from "@/components/atoms/LocaleSwitcher";
 import { RequireAuth } from "@/guards/requireAuth";
 import { ENV } from "@/config/env";
 export default async function ProtectedTemplate({ children }: { children: React.ReactNode }) {

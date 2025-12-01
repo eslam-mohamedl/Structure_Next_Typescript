@@ -1,5 +1,5 @@
 "use client";
-import ButtonLanguages from "@/components/atoms/ButtonLangauges";
+import ButtonLanguages from "@/components/atoms/LocaleSwitcher";
 import TopBar from "@/modules/auth/components/TopBar";
 export default function AuthTemplate({ children }: { children: React.ReactNode }) {
   return (
