@@ -8,7 +8,7 @@ import enMessages from "@/messages/en.json";
 import arMessages from "@/messages/ar.json";
 import { setRequestLocale } from "next-intl/server";
 import ThemeProvider from "@/providers/ThemeProvider";
-
+import ReactQueryProvider from "@/providers/ReactQueryProvider";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -45,12 +45,14 @@ export default async function RootLayout({ children, params }: Props) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <ThemeProvider>
-            {children}
-            <LocaleSwitcher />
-          </ThemeProvider>
-        </NextIntlClientProvider>
+        <ReactQueryProvider>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <ThemeProvider>
+              {children}
+              <LocaleSwitcher />
+            </ThemeProvider>
+          </NextIntlClientProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );
