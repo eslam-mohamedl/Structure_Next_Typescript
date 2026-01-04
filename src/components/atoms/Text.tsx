@@ -1,8 +1,9 @@
+import { cn } from "../../lib/cn";
 interface TextProps {
   children?: React.ReactNode;
-  size: "sm" | "md" | "lg";
+  size: "sm" | "md" | "lg" | "xl";
   center?: boolean;
-  variant?: "primary" | "secondary" | "gray" | "main" | "black";
+  variant?: "primary" | "orange" | "gray" | "white";
   className?: string;
 }
 
@@ -11,26 +12,27 @@ export default function Text({
   size = "md",
   center = true,
   variant = "primary",
-  className = "pt-[10px] capitalize font-semibold",
+  className = "pt-2.5 capitalize ",
   ...props
 }: TextProps) {
   const sizes = {
     sm: "text-sm",
-    md: "text-[15px]",
-    lg: "text-[18px]",
+    md: "text-[16px] md:text-[17px]",
+    lg: "text-[18px] md:text-[20px] ",
+    xl: "text-xl",
   };
   const variants = {
-    primary: "text-secondary-900",
-    secondary: "text-dark",
-    gray: "text-gray-500",
-    main: "dark:text-gray-200 text-dark",
-    black: "text-dark-secondary",
+    primary: "text-bg",
+    orange: "text-orange",
+    gray: "text-gray-300",
+    white: "text-white",
   };
-  const centerClass = center ? "text-center" : "";
-  const classesHeading = `${sizes[size]}  ${variants[variant]} ${centerClass} ${className}`;
   return (
     <>
-      <p className={classesHeading} {...props}>
+      <p
+        className={cn(sizes[size], variants[variant], center ? "text-center" : "", className)}
+        {...props}
+      >
         {children}
       </p>
     </>

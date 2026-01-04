@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useLocale } from "next-intl";
-import ThemeToggle from "@/components/atoms/ButtonTheme";
+import ThemeToggle from "@/components/atoms/ThemeButton.tsx";
 import Button from "@/components/atoms/Button";
 import { useTranslations } from "next-intl";
 export default function TopBar() {
@@ -47,7 +47,7 @@ export default function TopBar() {
             <ThemeToggle />
             <Link href={`/${locale}/sign-up`}>
               {" "}
-              <Button variant="outline3" size="md">
+              <Button variant="primary" size="md">
                 {t("register")}
               </Button>
             </Link>
