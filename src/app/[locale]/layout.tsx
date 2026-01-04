@@ -2,13 +2,11 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
-import LocaleSwitcher from "@/components/atoms/LocaleSwitcher";
 import { routing } from "@/i18n/routing";
 import enMessages from "@/messages/en.json";
 import arMessages from "@/messages/ar.json";
 import { setRequestLocale } from "next-intl/server";
-import ThemeProvider from "@/providers/ThemeProvider";
-import ReactQueryProvider from "@/providers/ReactQueryProvider";
+import AppProviders from "@/providers/AppProviders";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -45,14 +43,9 @@ export default async function RootLayout({ children, params }: Props) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
-        <ReactQueryProvider>
-          <NextIntlClientProvider locale={locale} messages={messages}>
-            <ThemeProvider>
-              {children}
-              <LocaleSwitcher />
-            </ThemeProvider>
-          </NextIntlClientProvider>
-        </ReactQueryProvider>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <AppProviders>{children}</AppProviders>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
