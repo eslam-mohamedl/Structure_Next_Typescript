@@ -129,6 +129,11 @@
   .ds-border-focus {
     border-color: var(--border-color-focus);
   }
+  .ds-border-secondary {
+    border-width: var(--border-width-sm);
+    border-style: solid;
+    border-color: var(--color-secondary);
+  }
 
   /* ================= RADIUS ================= */
   .ds-rounded-sm {

@@ -18,7 +18,7 @@ export default function NetworkState({ message = "تحقق من اتصالك ب�
       {onRetry && (
         <button
           onClick={onRetry}
-          className="bg-primary mt-4 cursor-pointer rounded-lg px-6 py-2 text-white transition"
+          className="ds-bg-primary mt-4 cursor-pointer rounded-lg px-6 py-2 text-white transition"
         >
           إعادة المحاولة
         </button>

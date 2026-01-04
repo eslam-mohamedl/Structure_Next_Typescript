@@ -99,6 +99,7 @@
     --color-bg-alt: var(--color-bg-alt-dark);
     --color-text: var(--color-text-dark);
     --color-form: var(--color-form-dark);
+    --color-text: var(--color-text-dark);
     --shadow-sm: 0 1px 3px rgba(233, 227, 227, 0.12);
     --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.15);
     --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.2);

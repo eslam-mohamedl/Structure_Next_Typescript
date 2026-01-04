@@ -7,6 +7,7 @@ import enMessages from "@/messages/en.json";
 import arMessages from "@/messages/ar.json";
 import { setRequestLocale } from "next-intl/server";
 import AppProviders from "@/providers/AppProviders";
+import AuthInitializer from "@/guards/AuthInitializer";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -44,7 +45,9 @@ export default async function RootLayout({ children, params }: Props) {
         suppressHydrationWarning
       >
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <AppProviders>{children}</AppProviders>
+          <AppProviders>
+            <AuthInitializer>{children}</AuthInitializer>
+          </AppProviders>
         </NextIntlClientProvider>
       </body>
     </html>

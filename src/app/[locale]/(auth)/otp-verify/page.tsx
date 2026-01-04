@@ -1,11 +1,11 @@
 import React from "react";
-import GuestTemplate from "@/components/templates/GuestTemplate";
-
+import OTPGuard from "@/modules/auth/guards/OTPGuard";
+import FormOTP from "@/modules/auth/components/FormOTP";
 function page() {
   return (
-    <GuestTemplate>
-      <div>otp verify</div>
-    </GuestTemplate>
+    <OTPGuard>
+      <FormOTP />
+    </OTPGuard>
   );
 }
 

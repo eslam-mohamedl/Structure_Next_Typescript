@@ -1,11 +1,11 @@
 import React from "react";
-import GuestTemplate from "@/components/templates/GuestTemplate";
-
+import DoneGuard from "@/modules/auth/guards/DoneGuard";
+import FormDone from "@/modules/auth/components/FormDone";
 function page() {
   return (
-    <GuestTemplate>
-      <div>done</div>
-    </GuestTemplate>
+    <DoneGuard>
+      <FormDone />
+    </DoneGuard>
   );
 }
 

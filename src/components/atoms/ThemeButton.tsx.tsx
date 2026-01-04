@@ -20,12 +20,12 @@ export default function ThemeButton() {
       <div className="flex items-center justify-center text-center">
         <span className="flex items-center justify-center px-3">
           {theme === "dark" ? (
-            <Moon className="text-light" size={24} />
+            <Moon className="ds-text" size={24} />
           ) : (
-            <Sun className="text-light ml-0 md:ml-1 dark:text-amber-300" size={24} />
+            <Sun className="ds-text ml-0 md:ml-1 dark:text-amber-300" size={24} />
           )}
         </span>
-        <span className="text-light ds-text-lg">Theme</span>
+        <span className="ds-text ds-text-lg">Theme</span>
       </div>
     </button>
   );

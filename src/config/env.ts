@@ -7,4 +7,5 @@ export const ENV = {
   APP_ENV: "development",
   ACCESS_TOKEN_KEY: "accessToken",
   REFRESH_TOKEN_KEY: "refreshToken",
+  DISABLE_DASHBOARD_PROTECTION: false,
 };

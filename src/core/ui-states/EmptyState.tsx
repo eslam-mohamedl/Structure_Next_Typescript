@@ -19,7 +19,7 @@ export default function EmptyState({ message = "لا توجد بيانات لع�
       <p className="mb-6 text-gray-500">يبدو أنك دخلت على مسار غير موجود</p>
       <Link
         href="/"
-        className="bg-primary hover:bg-primary/10 rounded-lg px-6 py-3 text-white transition"
+        className="ds-bg-primary hover:bg-primary/10 rounded-lg px-6 py-3 text-white transition"
       >
         العودة إلى الرئيسية
       </Link>

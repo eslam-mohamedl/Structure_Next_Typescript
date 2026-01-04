@@ -29,11 +29,12 @@ const Button = ({
   const baseClasses =
     "inline-flex items-center justify-center font-bold  transition-all duration-200 hover:scale-[1.04]  focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed";
   const variants = {
-    primary: "bg-primary text-white capitalize focus:ring-blue-500 cursor-pointer hover:opacity-95",
+    primary:
+      "ds-bg-primary text-white capitalize focus:ring-blue-500 cursor-pointer hover:opacity-95",
     secondary:
-      "bg-secondary text-white capitalize hover:opacity-95 focus:ring-secondary-600 cursor-pointer",
+      "ds-bg-secondary text-white capitalize hover:opacity-95 focus:ring-secondary-600 cursor-pointer",
     outline1:
-      "border-2 border-white text-black w-full  capitalize focus:ring-primary-500 cursor-pointer",
+      "ds-border-secondary ds-text border-2 border-white text-black w-full  capitalize focus:ring-primary-500 cursor-pointer",
     none: "",
   };
   const sizes = {
