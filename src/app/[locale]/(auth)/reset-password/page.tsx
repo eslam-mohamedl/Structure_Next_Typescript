@@ -1,11 +1,11 @@
 import React from "react";
-import GuestTemplate from "@/components/templates/GuestTemplate";
-
+import ResetGuard from "@/modules/auth/guards/ResetGuard";
+import FormResetPassword from "@/modules/auth/components/FormResetPassword";
 function page() {
   return (
-    <GuestTemplate>
-      <div>reset password</div>
-    </GuestTemplate>
+    <ResetGuard>
+      <FormResetPassword />
+    </ResetGuard>
   );
 }
 

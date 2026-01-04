@@ -19,7 +19,7 @@ export default function ErrorFallback({ error }: Props) {
       {error && <p className="mb-6 text-red-500">{error.message}</p>}
       <Link
         href="/"
-        className="bg-primary hover:ds-bg-primary rounded-lg px-6 py-3 text-white transition"
+        className="ds-bg-primary hover:ds-bg-primary rounded-lg px-6 py-3 text-white transition"
       >
         العودة إلى الرئيسية
       </Link>

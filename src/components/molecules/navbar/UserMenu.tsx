@@ -55,7 +55,7 @@ export default function UserMenu({ className }: props) {
       {open && (
         <div
           className={cn(
-            "ds-bg-alt absolute end-0 mt-2 w-64 cursor-pointer rounded-sm shadow-lg",
+            "ds-bg-alt absolute end-0 mt-2 w-60 cursor-pointer rounded-sm shadow-lg",
             className
           )}
         >
@@ -63,7 +63,7 @@ export default function UserMenu({ className }: props) {
             {/* User Info */}
             {token && !isLoading && profile ? (
               <div className="dark:border-dark-secondary flex items-center gap-3 border-b border-gray-200 px-3 py-2">
-                <div className="bg-primary flex h-9 w-9 items-center justify-center rounded-full font-bold text-white">
+                <div className="ds-bg-primary flex h-9 w-9 items-center justify-center rounded-full font-bold text-white">
                   {firstLetter}
                 </div>
                 <span className="truncate text-sm">{profile.email}</span>
@@ -72,7 +72,7 @@ export default function UserMenu({ className }: props) {
               <div className="flex flex-col gap-2 p-2">
                 <Link
                   href="/sign-in"
-                  className="ds-rounded-sm ds-bg-primary px-4 py-2 text-center text-white transition hover:opacity-90"
+                  className="ds-rounded-sm ds-bg-primary px-4 py-2 text-center text-white transition hover:opacity-80"
                   onClick={() => setOpen(false)}
                 >
                   Login
@@ -80,7 +80,7 @@ export default function UserMenu({ className }: props) {
 
                 <Link
                   href="/sign-up"
-                  className="ds-rounded-sm bg-gray-600 px-4 py-2 text-center text-white transition hover:bg-gray-700"
+                  className="ds-rounded-sm ds-bg-secondary px-4 py-2 text-center text-white transition hover:opacity-80"
                   onClick={() => setOpen(false)}
                 >
                   Register
