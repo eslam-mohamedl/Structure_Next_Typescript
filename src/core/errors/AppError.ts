@@ -1,26 +1,28 @@
 export type AppErrorType =
-  | "NETWORK"
+  | "VALIDATION"
   | "UNAUTHORIZED"
   | "FORBIDDEN"
   | "NOT_FOUND"
-  | "VALIDATION"
+  | "NETWORK"
   | "SERVER"
   | "UNKNOWN";
+
+interface AppErrorProps {
+  message: string;
+  type: AppErrorType;
+  statusCode?: number;
+  originalError?: Error;
+}
 
 export class AppError extends Error {
   type: AppErrorType;
   statusCode?: number;
-  originalError?: unknown;
+  originalError?: Error;
 
-  constructor(params: {
-    message: string;
-    type: AppErrorType;
-    statusCode?: number;
-    originalError?: unknown;
-  }) {
-    super(params.message);
-    this.type = params.type;
-    this.statusCode = params.statusCode;
-    this.originalError = params.originalError;
+  constructor(props: AppErrorProps) {
+    super(props.message);
+    this.type = props.type;
+    this.statusCode = props.statusCode;
+    this.originalError = props.originalError;
   }
 }

@@ -11,7 +11,7 @@ class ApiClient {
       const res = await axiosInstance.get<T>(url, { params });
       return res.data;
     } catch (error) {
-      throw mapApiError(error);
+      throw mapApiError(error as Error);
     }
   }
 
@@ -20,7 +20,7 @@ class ApiClient {
       const res = await axiosInstance.post<T>(url, data);
       return res.data;
     } catch (error) {
-      throw mapApiError(error);
+      throw mapApiError(error as Error);
     }
   }
 
@@ -29,7 +29,7 @@ class ApiClient {
       const res = await axiosInstance.put<T>(url, data);
       return res.data;
     } catch (error) {
-      throw mapApiError(error);
+      throw mapApiError(error as Error);
     }
   }
 
@@ -38,7 +38,7 @@ class ApiClient {
       const res = await axiosInstance.delete<T>(url);
       return res.data;
     } catch (error) {
-      throw mapApiError(error);
+      throw mapApiError(error as Error);
     }
   }
 }
