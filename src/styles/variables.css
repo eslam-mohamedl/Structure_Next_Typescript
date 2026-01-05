@@ -81,7 +81,12 @@
     --space-xl: 24px;
     --space-2xl: 28px;
     --space-3xl: 32px;
-    --space-4xl: 32px;
+    --space-4xl: 36px;
+
+    /* Motion */
+    --motion-fast: 150ms;
+    --motion-normal: 300ms;
+    --ease-out: ease-out;
 
     /* Dark Mode */
     --color-bg-dark: #131c23;
@@ -99,7 +104,6 @@
     --color-bg-alt: var(--color-bg-alt-dark);
     --color-text: var(--color-text-dark);
     --color-form: var(--color-form-dark);
-    --color-text: var(--color-text-dark);
     --shadow-sm: 0 1px 3px rgba(233, 227, 227, 0.12);
     --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.15);
     --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.2);

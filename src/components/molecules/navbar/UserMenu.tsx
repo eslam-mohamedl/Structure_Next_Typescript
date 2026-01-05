@@ -5,7 +5,7 @@ import Link from "next/link";
 import { cn } from "@/lib/cn";
 import { User, ChevronDown, ChevronUp } from "../../../../public/assets/icons/icons";
 import LanguageButton from "@/components/atoms/LanguageButton";
-import ThemeButton from "@/components/atoms/ThemeButton.tsx";
+import ThemeButton from "@/components/atoms/ThemeButton";
 import { useProfile } from "@/modules/auth/hooks/useProfile";
 import { useLogOut } from "@/modules/auth/hooks/useLogout";
 import Cookies from "js-cookie";
