@@ -12,7 +12,7 @@ It is designed to be maintainable, modular, and team-friendly, optimized for bot
 - Full support for themes and languages.
 - Advanced error and UX handling for all critical flows.
 - Strict code quality and developer tooling.
-- 
+
 # 🔹 Clean Architure project
   ```sh
 src/
