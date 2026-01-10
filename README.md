@@ -35,6 +35,52 @@ src/
 │ ├─ stagger.ts
 │ ├─ transitions.ts
 
+├─ components/                             # Reusable UI Components (Atomic Design)
+│  ├─ atoms/                               # Smallest elements
+│  │  ├─ Images.tsx
+│  │  ├─ Input.tsx
+│  │  ├─ Text.tsx
+│  │  └─ Title.tsx
+│  ├─ molecules/                           # Combination of atoms
+│  │  ├─ Navbar/
+│  │     ├─ DesktopNavActions.tsx
+│  │     ├─ DesktopNavLinks.tsx
+│  ├─ organisms/                           # Larger sections
+│  │  ├─ Navbar.tsx
+│  │  ├─ Sidebar.tsx
+│  │  └─ Footer.tsx
+│  ├─ templates/                           # Page-level structures
+│  │  ├─ AuthLayout.tsx
+│  │  └─ DashboardLayout.tsx
+│  │  └─ LandingLayout.tsx
+│                         
+├─ lib/
+│   ├─ cn.ts  # incude tailwind-merge ,  clsx, type ClassValue
+├─ styles/                                  # Global styles take design system and convert to utilites
+│  ├─ index.css
+│  └─ variables.css                         # file for design system form figma
+
+
+src/
+├─assets /                                 # Static assets
+│  ├─ images/
+│  │  └─ images.tsx                        # import and export all images in this file
+│  ├─ Lottie/                              # all images lottie files 
+│  │  └─ loading.json
+│  │  └─ No-Data.json
+│  │  └─ network.json
+│  │  └─ Loading.json
+│  │  └─ error.json
+│  └─ icons/
+│     └─ icons.tsx                          # import and export all icons in this file
+
+├─animations/
+│ ├─ fade.ts
+│ ├─ scale.ts
+│ ├─ slide.ts
+│ ├─ stagger.ts
+│ ├─ transitions.ts
+
 ├─app/
 │ ├─ [locale]        ├─ (auth)
 │ ├─ not-found.tsx   ├─ (client)
